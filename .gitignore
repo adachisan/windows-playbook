@@ -1,0 +1,7 @@
+*
+!.gitignore
+!*.xml
+!*.md
+!*.ps1
+!*.bat
+!*.txt
