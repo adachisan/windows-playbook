@@ -41,8 +41,8 @@ function Select-ZipFile {
 	if ($Pick -match '^\d+$' -and [int]$Pick -ge 1 -and [int]$Pick -le $Zips.Count) { $Zips[[int]$Pick - 1].FullName } else { $Pick }
 }
 
-if (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(544)) {
-	Start-Process wt "powershell -noexit -ep bypass -f `"$PSCommandPath`"" -Verb RunAs; exit
+if ($PSEdition -eq 'Core' -or !([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(544)) {
+	Start-Process wt "powershell.exe -noexit -ep bypass -f `"$PSCommandPath`"" -Verb RunAs; exit
 }
 $Temp = "$env:TEMP\Drivers_Backup_$([guid]::NewGuid().Guid)"
 mkdir $Temp -Force > $null
