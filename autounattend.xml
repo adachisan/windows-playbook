@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-GB&Locale=en-US&Keyboard=00000409&GeoLocation=242&PEMode=Default&WindowsEditionMode=Generic&WindowsEdition=pro&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&HidePowerShellWindows=true&ComputerNameMode=Random&TimeZoneMode=Explicit&TimeZone=Tokyo+Standard+Time&UserAccountMode=Unattended&AccountName0=Admin&AccountDisplayName0=&AccountPassword0=&AccountGroup0=Administrators&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Disabled&HideFiles=HiddenSystem&ShowFileExtensions=true&ClassicContextMenu=true&LaunchToThisPC=true&ShowEndTask=true&TaskbarSearch=Hide&TaskbarIconsMode=Default&DisableWidgets=true&HideTaskViewButton=true&DisableBingResults=true&StartTilesMode=Empty&StartPinsMode=Empty&DisableSac=true&DisableSmartScreen=true&DisableSystemRestore=true&EnableLongPaths=true&DeleteJunctions=true&AllowPowerShellScripts=true&DisableLastAccess=true&TurnOffSystemSounds=true&DisableAppSuggestions=true&PreventDeviceEncryption=true&HideEdgeFre=true&DisableEdgeStartupBoost=true&DeleteWindowsOld=true&DisableAutomaticRestartSignOn=true&DisableWpbt=true&PreventDeviceApps=true&EffectsMode=Default&DeleteEdgeDesktopIcon=true&DesktopIconsMode=Custom&IconRecycleBin=true&StartFoldersMode=Custom&CoreIsolationMode=Disabled&WifiMode=Skip&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Default&ColorMode=Default&WallpaperMode=Default&LockScreenMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveWindowsHello=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGameAssist=true&RemoveGetHelp=true&RemoveHandwriting=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOneSync=true&RemoveOutlook=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemovePowerShell2=true&RemovePowerShellISE=true&RemoveQuickAssist=true&RemoveRecall=true&RemoveRdpClient=true&RemoveSkype=true&RemoveSolitaire=true&RemoveSpeech=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveWallet=true&RemoveWeather=true&RemoveWindowsMediaPlayer=true&RemoveWordPad=true&RemoveXboxApps=true&RemoveYourPhone=true&FirstLogonScript0=%24ErrorActionPreference+%3D+%27SilentlyContinue%27%0D%0A%0D%0A%23+Disable+MPO+in+DWM+%28prevents+GPU+driver+stuttering%2Fflickering%29%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CMicrosoft%5CWindows%5CDwm%22+%22OverlayTestMode%22+5+-Type+DWord+-Force%0D%0A%0D%0A%23+Stop+and+disable+telemetry+%28DiagTrack+service%29%0D%0AStop-Service+DiagTrack+-Force%3B+Set-Service+DiagTrack+-StartupType+Disabled%0D%0A%0D%0A%23+Optimize+Windows+Defender+%2810%25+CPU+load+limit+%26+1-day+log+purge%29%0D%0ASet-MpPreference+-ScanAvgCPULoadFactor+10+-ScanPurgeItemsAfterDelay+1%0D%0A%0D%0A%23+Disable+lock+screen%2C+idle+console+lock%2C+and+delay+interval%0D%0Apowercfg+%2FSETDCVALUEINDEX+SCHEME_CURRENT+SUB_NONE+CONSOLELOCK+0%0D%0Apowercfg+%2FSETACVALUEINDEX+SCHEME_CURRENT+SUB_NONE+CONSOLELOCK+0%0D%0Apowercfg+%2FSETACTIVE+SCHEME_CURRENT%0D%0ASet-ItemProperty+%22HKCU%3A%5CControl+Panel%5CDesktop%22+%22DelayLockInterval%22+-1+-Type+DWord+-Force%0D%0ANew-Item+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CPersonalization%22+-Force+%7C+Out-Null%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CPersonalization%22+%22NoLockScreen%22+1+-Type+DWord+-Force%0D%0A%0D%0A%23+Enable+RAM+compression+and+configure+a+fixed+8+GB+pagefile%0D%0AEnable-MMAgent+-MemoryCompression%0D%0ASet-ItemProperty+-Path+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CControl%5CSession+Manager%5CMemory+Management%22+-Name+%22PagingFiles%22+-Type+MultiString+-Value+%22C%3A%5Cpagefile.sys+8192+8192%22+-Force%0D%0A%0D%0A%23+Disable+Delivery+Optimization+P2P+uploads+%28prevents+Windows+using+your+bandwidth%29%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDeliveryOptimization%5CConfig%22+%22DODownloadMode%22+0+-Type+DWord+-Force%0D%0A%0D%0A%23+Disable+automatic+updates+and+reboots%3A%0D%0ANew-Item+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5CAU%22+-Force+%7C+Out-Null%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5CAU%22+%22AUOptions%22+2+-Type+DWord+-Force%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5CAU%22+%22NoAutoRebootWithLoggedOnUsers%22+1+-Type+DWord%0D%0A%0D%0A%23+Block+Microsoft+Store+from+silently+auto-installing+suggested+apps%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindowsStore%22+%22AutoDownload%22+2+-Type+DWord+-Force%0D%0A%0D%0A%23+Sets+external+DNS+and+MTU+for+best+performance+and+availability%3A%0D%0AGet-NetAdapter+-Physical+%7C+Set-DnsClientServerAddress+-ServerAddresses+%28%279.9.9.9%27%2C+%278.8.8.8%27%29%0D%0AGet-NetAdapter+-Physical+%7C+Set-NetIPInterface+-AddressFamily+IPv4+-NlMtuBytes+1400%0D%0AClear-DnsClientCache%0D%0A%0D%0A%23+Best+power+config+for+laptops%3A%0D%0Apowercfg+%2Fh+%2Ftype+full%0D%0Apowercfg+%2Fh+%2Fsize+40%0D%0Apowercfg+%2Fchange+monitor-timeout-dc+2%0D%0Apowercfg+%2Fchange+standby-timeout-dc+15%0D%0Apowercfg+%2Fchange+hibernate-timeout-dc+60%0D%0Apowercfg+%2Fchange+monitor-timeout-ac+5%0D%0Apowercfg+%2Fchange+standby-timeout-ac+60%0D%0Apowercfg+%2Fchange+hibernate-timeout-ac+120%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_BUTTONS+LIDACTION+1%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_BUTTONS+LIDACTION+1%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_BUTTONS+PBUTTONACTION+2%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_BUTTONS+PBUTTONACTION+2%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_ENERGYSAVER+ESBATTTHRESHOLD+100%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_ENERGYSAVER+ESBATTTHRESHOLD+0%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_PROCESSOR+PROCTHROTTLEMIN+0%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_PROCESSOR+PROCTHROTTLEMIN+0%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_PROCESSOR+PROCTHROTTLEMAX+99%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_PROCESSOR+PROCTHROTTLEMAX+100%0D%0Apowercfg+%2Fsetactive+SCHEME_CURRENT%0D%0A%0D%0A%23+Creates+a+scheduled+task+that+runs+every+day+and+pauses+Windows+updates+for+35+days%3A%0D%0A%24c+%3D+%27cd+HKLM%3A%5CSoftware%5CMicrosoft%5CWindowsUpdate%5CUX%5CSettings%3B%24s%3D%22%7B0%3As%7DZ%22-f%28%24u%3D%5Bdatetime%5D%3A%3AUtcNow%29%3B%24e%3D%22%7B0%3As%7DZ%22-f%24u.AddDays%2835%29%3B%22Feature%22%2C%22Quality%22%2C%22%22%7C%25%7B%24p%3D%22Pause%24%28%24_%29Updates%22%3Bsp+.+%22%24%7Bp%7DStartTime%22+%24s%3Bsp+.+%28%24p%2B%28%22EndTime%22%2C%22ExpiryTime%22%29%5B%21%24_%5D%29+%24e%7D%27%0D%0A%24enc+%3D+%5BConvert%5D%3A%3AToBase64String%28%5BSystem.Text.Encoding%5D%3A%3AUnicode.GetBytes%28%24c%29%29%0D%0A%24settings+%3D+New-ScheduledTaskSettingsSet+-Priority+10+-StartWhenAvailable+-AllowStartIfOnBatteries+-DontStopIfGoingOnBatteries%0D%0ARegister-ScheduledTask+%22PauseWindowsUpdate%22+-Action+%28New-ScheduledTaskAction+powershell+%22-w+h+-nop+-enc+%24enc%22%29+-Trigger+%28New-ScheduledTaskTrigger+-Daily+-At+%28Get-Date%29%29+-Settings+%24settings+-User+%22SYSTEM%22+-Force+%7C+Out-Null%0D%0Aiex+%24c%0D%0A%0D%0A&FirstLogonScriptType0=Ps1&RestartExplorer=true&AppLockerMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-GB&Locale=en-US&Keyboard=00000409&GeoLocation=242&PEMode=Default&WindowsEditionMode=Generic&WindowsEdition=pro&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&HidePowerShellWindows=true&ComputerNameMode=Random&TimeZoneMode=Explicit&TimeZone=Tokyo+Standard+Time&UserAccountMode=Unattended&AccountName0=Admin&AccountDisplayName0=&AccountPassword0=&AccountGroup0=Administrators&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Disabled&HideFiles=HiddenSystem&ShowFileExtensions=true&ClassicContextMenu=true&LaunchToThisPC=true&ShowEndTask=true&TaskbarSearch=Hide&TaskbarIconsMode=Default&DisableWidgets=true&HideTaskViewButton=true&DisableBingResults=true&StartTilesMode=Empty&StartPinsMode=Empty&DisableSac=true&DisableSmartScreen=true&DisableFastStartup=true&DisableSystemRestore=true&EnableLongPaths=true&DeleteJunctions=true&AllowPowerShellScripts=true&DisableLastAccess=true&TurnOffSystemSounds=true&DisableAppSuggestions=true&PreventDeviceEncryption=true&HideEdgeFre=true&DisableEdgeStartupBoost=true&DeleteWindowsOld=true&DisableAutomaticRestartSignOn=true&DisableWpbt=true&PreventDeviceApps=true&EffectsMode=Default&DeleteEdgeDesktopIcon=true&DesktopIconsMode=Custom&IconRecycleBin=true&StartFoldersMode=Custom&CoreIsolationMode=Disabled&WifiMode=Skip&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Disabled&ColorMode=Custom&SystemColorTheme=Dark&AppsColorTheme=Dark&AccentColor=%238a2be2&AccentColorOnStart=true&AccentColorOnBorders=true&EnableTransparency=true&WallpaperMode=Default&LockScreenMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveWindowsHello=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGameAssist=true&RemoveGetHelp=true&RemoveHandwriting=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOneSync=true&RemoveOutlook=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemovePowerShell2=true&RemovePowerShellISE=true&RemoveQuickAssist=true&RemoveRecall=true&RemoveRdpClient=true&RemoveSkype=true&RemoveSolitaire=true&RemoveSpeech=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveWallet=true&RemoveWeather=true&RemoveWindowsMediaPlayer=true&RemoveWordPad=true&RemoveXboxApps=true&RemoveYourPhone=true&FirstLogonScript0=%24ErrorActionPreference+%3D+%27SilentlyContinue%27%0D%0A%0D%0A%23+Disable+MPO+in+DWM+%28prevents+GPU+driver+stuttering%2Fflickering%29%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CMicrosoft%5CWindows%5CDwm%22+%22OverlayTestMode%22+5+-Type+DWord+-Force%0D%0A%0D%0A%23+Stop+and+disable+telemetry+%28DiagTrack+service%29%0D%0AStop-Service+DiagTrack+-Force%3B+Set-Service+DiagTrack+-StartupType+Disabled%0D%0A%0D%0A%23+Optimize+Windows+Defender+%2810%25+CPU+load+limit+%26+1-day+log+purge%29%0D%0ASet-MpPreference+-ScanAvgCPULoadFactor+10+-ScanPurgeItemsAfterDelay+1%0D%0A%0D%0A%23+Disable+lock+screen%2C+idle+console+lock%2C+and+delay+interval%0D%0Apowercfg+%2FSETDCVALUEINDEX+SCHEME_CURRENT+SUB_NONE+CONSOLELOCK+0%0D%0Apowercfg+%2FSETACVALUEINDEX+SCHEME_CURRENT+SUB_NONE+CONSOLELOCK+0%0D%0Apowercfg+%2FSETACTIVE+SCHEME_CURRENT%0D%0ASet-ItemProperty+%22HKCU%3A%5CControl+Panel%5CDesktop%22+%22DelayLockInterval%22+-1+-Type+DWord+-Force%0D%0ANew-Item+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CPersonalization%22+-Force+%7C+Out-Null%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CPersonalization%22+%22NoLockScreen%22+1+-Type+DWord+-Force%0D%0A%0D%0A%23+Enable+RAM+compression+and+configure+a+fixed+8+GB+pagefile%0D%0AEnable-MMAgent+-MemoryCompression%0D%0ASet-ItemProperty+-Path+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CControl%5CSession+Manager%5CMemory+Management%22+%22PagingFiles%22+%22C%3A%5Cpagefile.sys+8192+8192%22+-Type+MultiString+-Force%0D%0A%0D%0A%23+Disable+Delivery+Optimization+P2P+uploads+%28prevents+Windows+using+your+bandwidth%29%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDeliveryOptimization%5CConfig%22+%22DODownloadMode%22+0+-Type+DWord+-Force%0D%0A%0D%0A%23+Disable+automatic+updates+and+reboots%3A%0D%0ANew-Item+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5CAU%22+-Force+%7C+Out-Null%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5CAU%22+%22AUOptions%22+2+-Type+DWord+-Force%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5CAU%22+%22NoAutoRebootWithLoggedOnUsers%22+1+-Type+DWord%0D%0A%0D%0A%23+Block+Microsoft+Store+from+silently+auto-installing+suggested+apps%0D%0ASet-ItemProperty+%22HKLM%3A%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindowsStore%22+%22AutoDownload%22+2+-Type+DWord+-Force%0D%0A%0D%0A%23+Sets+external+DNS+and+MTU+for+best+performance+and+availability%3A%0D%0AGet-NetAdapter+-Physical+%7C+Set-DnsClientServerAddress+-ServerAddresses+%28%279.9.9.9%27%2C+%278.8.8.8%27%29%0D%0AGet-NetAdapter+-Physical+%7C+Set-NetIPInterface+-AddressFamily+IPv4+-NlMtuBytes+1400%0D%0AClear-DnsClientCache%0D%0A%0D%0A%23+Best+power+config+for+laptops%3A%0D%0Apowercfg+%2Fhibernate+on%0D%0Apowercfg+%2Fh+%2Ftype+full%0D%0Apowercfg+%2Fh+%2Fsize+40%0D%0Apowercfg+%2Fchange+monitor-timeout-dc+2%0D%0Apowercfg+%2Fchange+standby-timeout-dc+15%0D%0Apowercfg+%2Fchange+hibernate-timeout-dc+60%0D%0Apowercfg+%2Fchange+monitor-timeout-ac+5%0D%0Apowercfg+%2Fchange+standby-timeout-ac+60%0D%0Apowercfg+%2Fchange+hibernate-timeout-ac+120%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_BUTTONS+LIDACTION+1%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_BUTTONS+LIDACTION+1%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_BUTTONS+PBUTTONACTION+2%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_BUTTONS+PBUTTONACTION+2%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_ENERGYSAVER+ESBATTTHRESHOLD+100%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_ENERGYSAVER+ESBATTTHRESHOLD+0%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_PROCESSOR+PROCTHROTTLEMIN+0%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_PROCESSOR+PROCTHROTTLEMIN+0%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_PROCESSOR+PROCTHROTTLEMAX+99%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_PROCESSOR+PROCTHROTTLEMAX+100%0D%0Apowercfg+%2Fsetdcvalueindex+SCHEME_CURRENT+SUB_SLEEP+HYBRIDSLEEP+0%0D%0Apowercfg+%2Fsetacvalueindex+SCHEME_CURRENT+SUB_SLEEP+HYBRIDSLEEP+0%0D%0Apowercfg+%2Fsetactive+SCHEME_CURRENT%0D%0ASet-ItemProperty+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CControl%5CSession+Manager%5CPower%22+%22HiberbootEnabled%22+0+-Type+DWord+-Force%0D%0A%0D%0A%23+Creates+a+scheduled+task+that+runs+every+day+and+pauses+Windows+updates+for+35+days%3A%0D%0A%24c+%3D+%27cd+HKLM%3A%5CSoftware%5CMicrosoft%5CWindowsUpdate%5CUX%5CSettings%3B%24s%3D%22%7B0%3As%7DZ%22-f%28%24u%3D%5Bdatetime%5D%3A%3AUtcNow%29%3B%24e%3D%22%7B0%3As%7DZ%22-f%24u.AddDays%2835%29%3B%22Feature%22%2C%22Quality%22%2C%22%22%7C%25%7B%24p%3D%22Pause%24%28%24_%29Updates%22%3Bsp+.+%22%24%7Bp%7DStartTime%22+%24s%3Bsp+.+%28%24p%2B%28%22EndTime%22%2C%22ExpiryTime%22%29%5B%21%24_%5D%29+%24e%7D%27%0D%0A%24enc+%3D+%5BConvert%5D%3A%3AToBase64String%28%5BSystem.Text.Encoding%5D%3A%3AUnicode.GetBytes%28%24c%29%29%0D%0A%24settings+%3D+New-ScheduledTaskSettingsSet+-Priority+10+-StartWhenAvailable+-AllowStartIfOnBatteries+-DontStopIfGoingOnBatteries%0D%0ARegister-ScheduledTask+%22PauseWindowsUpdate%22+-Action+%28New-ScheduledTaskAction+powershell+%22-w+h+-nop+-enc+%24enc%22%29+-Trigger+%28New-ScheduledTaskTrigger+-Daily+-At+%28Get-Date%29%29+-Settings+%24settings+-User+%22SYSTEM%22+-Force+%7C+Out-Null%0D%0Aiex+%24c%0D%0A&FirstLogonScriptType0=Ps1&RestartExplorer=true&AppLockerMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -110,8 +110,8 @@
 	<Extensions xmlns="https://schneegans.de/windows/unattend-generator/">
 		<Build>
 			<Commit>
-				<Hash>538f930aeea9c3d51fdd0b4822e2d076fef999e8</Hash>
-				<GitHubUrl>https://github.com/cschneegans/unattend-generator/commit/538f930aeea9c3d51fdd0b4822e2d076fef999e8</GitHubUrl>
+				<Hash>97c1141d51a9cdae6831107cb3311c2f9eb8121b</Hash>
+				<GitHubUrl>https://github.com/cschneegans/unattend-generator/commit/97c1141d51a9cdae6831107cb3311c2f9eb8121b</GitHubUrl>
 			</Commit>
 		</Build>
 		<ExtractScript>
@@ -336,6 +336,59 @@ Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type
 	&lt;/DefaultLayoutOverride&gt;
 &lt;/LayoutModificationTemplate&gt;
 		</File>
+		<File path="C:\Windows\Setup\Scripts\SetColorTheme.ps1">
+$lightThemeSystem = 0;
+$lightThemeApps = 0;
+$accentColorOnStart = 1;
+$enableTransparency = 1;
+$htmlAccentColor = '#8A2BE2';
+&amp; {
+	$params = @{
+		LiteralPath = 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize';
+		Force = $true;
+		Type = 'DWord';
+	};
+	Set-ItemProperty @params -Name 'SystemUsesLightTheme' -Value $lightThemeSystem;
+	Set-ItemProperty @params -Name 'AppsUseLightTheme' -Value $lightThemeApps;
+	Set-ItemProperty @params -Name 'ColorPrevalence' -Value $accentColorOnStart;
+	Set-ItemProperty @params -Name 'EnableTransparency' -Value $enableTransparency;
+};
+&amp; {
+	Add-Type -AssemblyName 'System.Drawing';
+	$accentColor = [System.Drawing.ColorTranslator]::FromHtml( $htmlAccentColor );
+
+	function ConvertTo-DWord {
+		param(
+			[System.Drawing.Color]
+			$Color
+		);
+						
+		[byte[]] $bytes = @(
+			$Color.R;
+			$Color.G;
+			$Color.B;
+			$Color.A;
+		);
+		return [System.BitConverter]::ToUInt32( $bytes, 0); 
+	}
+
+	$startColor = [System.Drawing.Color]::FromArgb( 0xD2, $accentColor );
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent' -Name 'StartColorMenu' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent' -Name 'AccentColorMenu' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	Set-ItemProperty -LiteralPath 'Registry::HKCU\Software\Microsoft\Windows\DWM' -Name 'AccentColor' -Value( ConvertTo-DWord -Color $accentColor ) -Type 'DWord' -Force;
+	$params = @{
+		LiteralPath = 'Registry::HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Accent';
+		Name = 'AccentPalette';
+	};
+	$palette = Get-ItemPropertyValue @params;
+	$index = 20;
+	$palette[ $index++ ] = $accentColor.R;
+	$palette[ $index++ ] = $accentColor.G;
+	$palette[ $index++ ] = $accentColor.B;
+	$palette[ $index++ ] = $accentColor.A;
+	Set-ItemProperty @params -Value $palette -Type 'Binary' -Force;
+};
+		</File>
 		<File path="C:\Windows\Setup\Scripts\unattend-01.ps1">
 $ErrorActionPreference = 'SilentlyContinue'
 
@@ -358,7 +411,7 @@ Set-ItemProperty "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" "No
 
 # Enable RAM compression and configure a fixed 8 GB pagefile
 Enable-MMAgent -MemoryCompression
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "PagingFiles" -Type MultiString -Value "C:\pagefile.sys 8192 8192" -Force
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" "PagingFiles" "C:\pagefile.sys 8192 8192" -Type MultiString -Force
 
 # Disable Delivery Optimization P2P uploads (prevents Windows using your bandwidth)
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" "DODownloadMode" 0 -Type DWord -Force
@@ -377,6 +430,7 @@ Get-NetAdapter -Physical | Set-NetIPInterface -AddressFamily IPv4 -NlMtuBytes 14
 Clear-DnsClientCache
 
 # Best power config for laptops:
+powercfg /hibernate on
 powercfg /h /type full
 powercfg /h /size 40
 powercfg /change monitor-timeout-dc 2
@@ -391,11 +445,14 @@ powercfg /setdcvalueindex SCHEME_CURRENT SUB_BUTTONS PBUTTONACTION 2
 powercfg /setacvalueindex SCHEME_CURRENT SUB_BUTTONS PBUTTONACTION 2
 powercfg /setdcvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 100
 powercfg /setacvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 0
-powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 0
 powercfg /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 0
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 0
 powercfg /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 99
 powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 100
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_SLEEP HYBRIDSLEEP 0
+powercfg /setacvalueindex SCHEME_CURRENT SUB_SLEEP HYBRIDSLEEP 0
 powercfg /setactive SCHEME_CURRENT
+Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power" "HiberbootEnabled" 0 -Type DWord -Force
 
 # Creates a scheduled task that runs every day and pauses Windows updates for 35 days:
 $c = 'cd HKLM:\Software\Microsoft\WindowsUpdate\UX\Settings;$s="{0:s}Z"-f($u=[datetime]::UtcNow);$e="{0:s}Z"-f$u.AddDays(35);"Feature","Quality",""|%{$p="Pause$($_)Updates";sp . "${p}StartTime" $s;sp . ($p+("EndTime","ExpiryTime")[!$_]) $e}'
@@ -464,6 +521,9 @@ $scripts = @(
 		fsutil.exe behavior set disableLastAccess 1;
 	};
 	{
+		reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d 0 /f;
+	};
+	{
 		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v AllowNewsAndInterests /t REG_DWORD /d 0 /f;
 	};
 	{
@@ -485,6 +545,9 @@ $scripts = @(
 	};
 	{
 		&amp; 'C:\Windows\Setup\Scripts\SetStartPins.ps1';
+	};
+	{
+		reg.exe add "HKU\.DEFAULT\Control Panel\Accessibility\StickyKeys" /v Flags /t REG_SZ /d 10 /f;
 	};
 	{
 		  reg.exe add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d 0 /f;
@@ -584,6 +647,9 @@ $scripts = @(
 		Set-ItemProperty -Path 'Registry::HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Start' -Name 'VisiblePlaces' -Value $( [convert]::FromBase64String('') ) -Type 'Binary';
 	};
 	{
+		&amp; 'C:\Windows\Setup\Scripts\SetColorTheme.ps1';
+	};
+	{
 		Get-Process -Name 'explorer' -ErrorAction 'SilentlyContinue' | Where-Object -FilterScript {
 			$_.SessionId -eq ( Get-Process -Id $PID ).SessionId;
 		} | Stop-Process -Force;
@@ -668,6 +734,12 @@ $scripts = @(
 	};
 	{
 		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings" /v TaskbarEndTask /t REG_DWORD /d 1 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Control Panel\Accessibility\StickyKeys" /v Flags /t REG_SZ /d 10 /f;
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\DWM" /v ColorPrevalence /t REG_DWORD /d 1 /f;
 	};
 	{
 		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\RunOnce" /v "UnattendedSetup" /t REG_SZ /d "powershell.exe -WindowStyle \""Hidden\"" -ExecutionPolicy \""Unrestricted\"" -NoProfile -File \""C:\Windows\Setup\Scripts\UserOnce.ps1\""" /f;

@@ -31,7 +31,7 @@ Set-MpPreference -ScanAvgCPULoadFactor 10 -ScanPurgeItemsAfterDelay 1
 # Enable memory compression:
 Enable-MMAgent -MemoryCompression
 # Set the pagefile size to 8GB (Sweet spot):
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "PagingFiles" -Type MultiString -Value "C:\pagefile.sys 8192 8192" -Force
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" "PagingFiles" "C:\pagefile.sys 8192 8192" -Type MultiString -Force
 # Disable Delivery Optimization P2P uploads (prevents Windows using your bandwidth)
 Set-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" "DODownloadMode" 0 -Type DWord -Force
 # Sets external DNS and MTU for best performance and availability:
@@ -151,7 +151,7 @@ git config --global alias.send '!f() { git remote add origin "https://github.com
 git config --global --remove-section alias
 ```
 
-## Power Management (PowerCfg)
+## Power Management
 
 ```powershell
 # Show battery chargding rate in watts:
@@ -170,9 +170,12 @@ powercfg /a
 powercfg -requestsoverride PROCESS "process_name.exe" SYSTEM
 # Block a driver from preventing sleep (edit the name):
 powercfg -requestsoverride DRIVER "driver_name" SYSTEM
-# Enable full hibernation & reduce file size to 40% RAM:
+# Enable full hibernation and reduce file size to 40% RAM:
+powercfg /hibernate on
 powercfg /h /type full
 powercfg /h /size 40
+# Disable fast startup (that can cause battery auto-discharge):
+Set-ItemProperty "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Power" "HiberbootEnabled" 0 -Type DWord -Force
 # Battery (DC): Screen 2m, Sleep 15m, Hibernate 60m:
 powercfg /change monitor-timeout-dc 2
 powercfg /change standby-timeout-dc 15
@@ -191,11 +194,14 @@ powercfg /setacvalueindex SCHEME_CURRENT SUB_BUTTONS PBUTTONACTION 2
 powercfg /setdcvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 100
 powercfg /setacvalueindex SCHEME_CURRENT SUB_ENERGYSAVER ESBATTTHRESHOLD 0
 # CPU min state: 0% on both:
-powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 0
 powercfg /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 0
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 0
 # CPU max state: 99% on DC (disables Turbo Boost), 100% on AC:
 powercfg /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 99
 powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 100
+# Disable hybrid sleep:
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_SLEEP HYBRIDSLEEP 0
+powercfg /setacvalueindex SCHEME_CURRENT SUB_SLEEP HYBRIDSLEEP 0
 # Apply changes:
 powercfg /setactive SCHEME_CURRENT
 ```
