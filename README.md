@@ -5,7 +5,7 @@ Personal collection of everything I use to set up, optimize, and maintain Window
 ## What's inside
 
 - `Manage-Drivers.ps1` — Backup and restore Windows drivers.
-- `commands.md` — Cheat sheet of commands for setup, tweaks, drivers, apps, and maintenance.
+- `useful-commands.md` — Cheat sheet of commands for setup, tweaks, drivers, apps, and maintenance.
 - `autounattend.xml` — Unattended Windows 11 Pro install: bypasses hardware checks, creates the local `Admin` account, and removes bloatware.
 
 ## autounattend.xml — Unattended Windows 11 install
@@ -40,13 +40,12 @@ All scripts in this repository are executed remotely in-memory via `irm <url> | 
    - Keep scripts in the repository root (no subfolders).
    - Use short, lowercase, hyphen-separated filenames (e.g., `clean-temp.ps1`, `fix-dns.ps1`).
 
-## commands.md Rules
+## useful-commands.md Rules
 
-- Keep the minimalist style: `##` heading per topic, all commands of a topic in a single code block for easy copy and paste.
-- Label each command with a short, direct, one-line `#` comment.
+- Keep the minimalist style: a `##` heading per topic, with all commands of a topic in a single code block for easy copy and paste.
+- Label each command with a short, direct, one-line `#` comment in English.
 - Use simple, direct English in every description.
-- Only add tested commands that work on a clean Windows setup.
-- Don't repeat commands already covered in another section.
+- Only add commands you have tested to work on a clean Windows setup.
 
 ## Requirements
 
